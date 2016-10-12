@@ -1,8 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
 
 import results.IssueResults;
@@ -35,7 +38,17 @@ public class GetItems {
 
 		JSONArray ja = response.getObject().getJSONArray("results");
 		//System.out.println(ja.toString());
-
+		/*
+		Gson gson = new Gson();
+  	  	try {  
+		   //write converted json data to a file named "CountryGSON.json"  
+		   FileWriter writer = new FileWriter("C:\\Users\\SuperAdmin\\Desktop\\jamejson\\IssueArray.json");  
+		   writer.write(gson.toJson(ja));  
+		   writer.close();  
+		    
+  	  	} catch (IOException e) {  
+		   e.printStackTrace();  
+  	  	}  	*/
 		// issue obj that alex will get
 		IssueResults issueObj = new IssueResults();
 		
@@ -47,7 +60,17 @@ public class GetItems {
 	public StringObject getIssuesDetail (String issueID){
 		// make call to CVrequest
 		JSONObject joIssue = CVrequest.getIssue(issueID);
-
+		/*
+		Gson gson = new Gson();
+  	  	try {  
+		   //write converted json data to a file named "CountryGSON.json"  
+		   FileWriter writer = new FileWriter("C:\\Users\\SuperAdmin\\Desktop\\jamejson\\IssueDetail.json");  
+		   writer.write(gson.toJson(joIssue));  
+		   writer.close();  
+		    
+  	  	} catch (IOException e) {  
+		   e.printStackTrace();  
+  	  	} */ 	
 		// issue obj that alex will get
 		StringObject issueStringObj = new StringObject();
 

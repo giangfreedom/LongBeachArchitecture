@@ -74,11 +74,11 @@ public class jsonParserObj {
                 name = name.trim();
                 myIssue.setIssue_Name(name);
             }
-            // number
-            if(check(jo,"number")){
-                String number = jo.getString("number");
+            // issue number
+            if(check(jo,"issue_number")){
+                String number = jo.getString("issue_number");
                 number = number.trim();
-                myIssue.setIssue_Name(number);
+                myIssue.setIssue_Number(number);
             }
 
 		} catch (JSONException e) {
@@ -151,7 +151,7 @@ public class jsonParserObj {
             
             if(check(jo,"first_appearance_storyarcs")){
                 JSONObject FirstAppearanceSAobjects = jo.getJSONObject("first_appearance_storyarcs");
-                if(check(jo,"story_arc")){
+                if(check(FirstAppearanceSAobjects,"story_arc")){
                 	JSONObject Story_ArcObjects = FirstAppearanceSAobjects.getJSONObject("story_arc");
                 	String story_arc = Story_ArcObjects.getString("name");
                 	story_arc = story_arc.trim();
@@ -162,21 +162,21 @@ public class jsonParserObj {
             // the target is there and it value is not ""           
             if(check(jo,"person_credits")){
             	JSONObject personcreditsObjects = jo.getJSONObject("person_credits");
-            	if(check(jo,"person")){
-            		JSONObject PersonObjects = personcreditsObjects.getJSONObject("person");
-            		if(check(jo,"myArrayList")){
-            			JSONArray myArrayList = PersonObjects.getJSONArray("myArrayList");
-                        JSONObject FirstArrayObj = (JSONObject) myArrayList.get(0);
-                        
-                        String artistName = FirstArrayObj.getString("name");
-                        String artistRole = FirstArrayObj.getString("role");
-                        
-                        artistName = artistName.trim();
-                        artistRole = artistRole.trim();
-                        
-                    	myarticle.setArtist(artistName);
-                    	myarticle.setRole(artistRole);
-            		}
+            	if(check(personcreditsObjects,"person")){
+            		JSONArray PersonObjects = personcreditsObjects.getJSONArray("person");
+        			System.out.println("test3");
+
+                    JSONObject FirstArrayObj = (JSONObject) PersonObjects.get(0);
+                    
+                    String artistName = FirstArrayObj.getString("name");
+                    String artistRole = FirstArrayObj.getString("role");
+                    
+                    artistName = artistName.trim();
+                    artistRole = artistRole.trim();
+                    
+                	myarticle.setArtist(artistName);
+                	myarticle.setRole(artistRole);
+ 
             	}
             }
             

@@ -1,7 +1,7 @@
 package model;
 
 
-public class IssueObject extends StringObject{
+public class IssueObject {
 	 private String Issue_CoverDate;
 	 private String Issue_Description;
 	 private String Issue_ID;
