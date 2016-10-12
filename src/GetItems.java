@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import com.google.gson.Gson;
 import com.mashape.unirest.http.JsonNode;
 
@@ -38,17 +39,7 @@ public class GetItems {
 
 		JSONArray ja = response.getObject().getJSONArray("results");
 		//System.out.println(ja.toString());
-		/*
-		Gson gson = new Gson();
-  	  	try {  
-		   //write converted json data to a file named "CountryGSON.json"  
-		   FileWriter writer = new FileWriter("C:\\Users\\SuperAdmin\\Desktop\\jamejson\\IssueArray.json");  
-		   writer.write(gson.toJson(ja));  
-		   writer.close();  
-		    
-  	  	} catch (IOException e) {  
-		   e.printStackTrace();  
-  	  	}  	*/
+		
 		// issue obj that alex will get
 		IssueResults issueObj = new IssueResults();
 		
@@ -57,9 +48,13 @@ public class GetItems {
 		return issueObj;
 	}
 	
-	public StringObject getIssuesDetail (String issueID){
-		// make call to CVrequest
-		JSONObject joIssue = CVrequest.getIssue(issueID);
+	public StringObject getIssuesDetail (JSONObject JsonIssueObject){
+		// issue obj that alex will get
+		StringObject issueStringObj = new StringObject();
+
+		issueStringObj = parsedjsonObj.issueDetailParser(JsonIssueObject);
+		
+		return issueStringObj;
 		/*
 		Gson gson = new Gson();
   	  	try {  
@@ -72,10 +67,25 @@ public class GetItems {
 		   e.printStackTrace();  
   	  	} */ 	
 		// issue obj that alex will get
-		StringObject issueStringObj = new StringObject();
-
-		issueStringObj = parsedjsonObj.issueDetailParser(joIssue);
-		
-		return issueStringObj;
+	}
+	/*
+	* Returns all data for the given issue id
+	* @param issId - String of the comic's unqiue ID
+	* @return JSON object with the following keys
+	* person_credits<br> concept_credits<br> first_appearance_storyarcs<br> aliases<br> deck<br> description<br>
+	* api_detail_url<br> issue_number<br> location_credits<br> cover_date<br> id<br> date_last_updated<br> store_date<br>
+	* character_credits<br> first_appearance_locations<br> image<br> site_detail_url<br> first_appearance_objects<br>
+	* first_appearance_concepts<br> first_appearance_characters<br> volume<br>date_added<br> first_appearance_teams<br>
+	* team_credits<br>name<br>story_arc_credits<br>character_died_in<br>object_credits<br>has_staff_review<br>
+	* team_disbanded_in
+	*/
+	public static JSONObject getJsonObjIssue (String issueID){
+		JSONObject joIssue = new JSONObject();
+		try{
+			joIssue = CVrequest.getIssue(issueID);
+		}catch (Exception e) {  
+			   e.printStackTrace();  
+	  	} 
+		return joIssue;
 	}
 }

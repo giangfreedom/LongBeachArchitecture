@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import org.json.JSONObject;
+
 import results.VolumeResults;
 
 
@@ -27,8 +29,11 @@ public class GiangMain {
 		System.out.println("enter issue id");
 		input = in.nextLine();
 		in.close();
-		// get a StringObject Object back and call it PrintAllItem function to see detail
-		test.getIssuesDetail(input).PrintAllItem();
+		// get the issue as a json object
+		JSONObject joIssue = test.getJsonObjIssue(input);
+		// pass the json object in to obtain the issue detail object
+		// in form of StringObject
+		test.getIssuesDetail(joIssue).PrintAllItem();
 	}
 
 }
