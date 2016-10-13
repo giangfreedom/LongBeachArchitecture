@@ -7,7 +7,12 @@ public class Volume {
 
 	private JSONObject vol = new JSONObject();
 	private String id;
-	//private boolean full = false;
+	private String name;
+	private String startYear;
+	private String publisher;
+	private String numIssues;
+	
+	private boolean full = false;
 	
 	// constructor that take in a volume json object
 	// the json object belong to an array of 
@@ -21,6 +26,16 @@ public class Volume {
 		else{
 			System.out.println("id not found");
 		}
+		
+		name=getName();
+		startYear = getStartYear();
+		publisher = getPublisher();
+		numIssues = getCountofIssue();
+	}
+	
+	public String toString(){		
+		return ("name: " + name + "\t\t\tstart_year: " + startYear + "\tpublisher: " + publisher 
+				+ "\t\tid: " + id + "\tcount_of_issues: " + numIssues);		
 	}
 	
 	// return the json object id field
@@ -73,7 +88,7 @@ public class Volume {
 	
 	// return the json object publisher field
 	// return null if the field contain null or empty
-	public String getPubliher (){
+	public String getPublisher (){
 		if(check(vol, "publisher")){
         	JSONObject publisherobjects = vol.getJSONObject("publisher"); 
         	if(check(publisherobjects,"name")){
