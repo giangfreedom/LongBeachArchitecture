@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import model.Volumes;
+import model.Volume;
 
 import org.json.JSONArray;
 
@@ -19,7 +19,7 @@ public class mainToTestVolumesClass {
 		JSONArray volarray = CVrequest.searchVolume(input);	
 
 		for(int i = 0; i < volarray.length(); i++){
-			Volumes volumes = new Volumes(volarray.getJSONObject(i));
+			Volume volumes = new Volume(volarray.getJSONObject(i));
 			System.out.println();			
 			System.out.println("name: " + volumes.getName()
 					+ "\t\t\tstart_year: " + volumes.getStartYear()
